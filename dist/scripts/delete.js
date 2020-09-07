@@ -1,0 +1,91 @@
+/* global Dashboard, bootbox */
+
+(function($) {
+    $.fn.Delete = function(options) {
+        var settings = $.extend(true, {
+            selector: '.delete',
+            ajax: {
+                url:    'javascript:;',
+                method: 'POST'
+            },
+            data: {
+                /* u desire */
+            },
+            text: {
+                yes:      'Yes',
+                no:       'No',
+                title:    'Confirmation',
+                question: 'Are you sure to delete this record?'
+            }            
+        }, options);
+
+        if (this.is('a')) {
+            this.click(function(e) {
+                e.preventDefault();
+                
+                handler($(this));
+            });
+        } else {
+            this.on('click', settings.selector, function (e) {
+                e.preventDefault();
+                
+                handler($(this));
+            });
+        }
+        
+        var handler = function(button) {
+            settings.data['id'] = button.attr('href');
+
+            if (typeof button.attr('alias') !== 'undefined') {
+                settings.data['table'] = button.attr('alias');
+            }
+            
+            if (typeof button.attr('logger') !== 'undefined') {
+                settings.data['logger'] = button.attr('logger');
+            }
+
+            if (typeof button.attr('files_id') !== 'undefined') {
+                settings.data['files_id'] = button.attr('files_id');
+            }
+
+            bootbox.confirm({
+                title: settings.text.title,
+                message: settings.text.question,
+                buttons: {
+                    confirm: {
+                        label: '<i class="fa fa-check"></i> ' + settings.text.yes,
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: '<i class="fa fa-times"></i> ' + settings.text.no,
+                        className: 'btn-danger'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        var form = document.createElement('form');
+                        
+                        let idStr = 'form' + (document.forms.length + 1);
+
+                        form.id = idStr;
+                        form.action = settings.ajax.url;
+                        form.method = settings.ajax.method;
+                        for (let key in settings.data) {
+                            var element = document.createElement('input');
+                            element.name = key;
+                            element.type = 'hidden';
+                            element.value = settings.data[key];
+
+                            form.appendChild(element);
+                        }
+                        document.body.appendChild(form);
+                        Dashboard.submit($('#' + idStr), button);
+                        document.body.removeChild(form);
+                    }
+                }
+            });
+        };
+        
+        return this;
+    }; 
+} (jQuery));

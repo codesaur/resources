@@ -1,0 +1,75 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Open Sans', sans-serif;
+}
+body {
+  padding-top: 5rem;
+}
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+.top-navigation {
+    border-bottom: 2px solid #d0b566;
+}
+
+.footer {
+    border-top: 2px solid #d0b566;
+}
+
+.breadcrumb-item a:hover, .footer-link:hover {
+    text-decoration: none;
+}
+
+.scroll-to-top {
+    display: inline-block;
+    background-color: #cad153;
+    width: 44px;
+    height: 44px;
+    text-align: center;
+    border-radius: 4px;
+    position: fixed;
+    bottom: 40px;
+    right: 0px;
+    transition: background-color .3s, opacity .5s, visibility .5s;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1000;
+}
+
+.scroll-to-top::after {
+    line-height: 50px;
+    color: #fff;
+}
+
+.scroll-to-top:hover {
+    cursor: pointer;
+    background-color: #0d6b31;
+}
+
+.scroll-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+@media (min-width: 500px) {
+    .scroll-to-top {
+        margin: 20px;
+    }
+}

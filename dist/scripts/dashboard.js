@@ -127,7 +127,7 @@ var Dashboard = function() {
                             /*position: 'top-right',*/
                             title: title,
                             text: message,
-                            type: type === 'default' ? 'warning' : (type === 'info' ? 'success' : type)                        
+                            icon: type === 'default' ? 'warning' : (type === 'info' ? 'success' : type)                        
                         };
 
                         if (typeof response.confirm !== 'undefined') {

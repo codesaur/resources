@@ -165,6 +165,10 @@ var Dashboard = function() {
         complete: function(type, button, modal, response) {
             if (typeof button !== 'undefined') {
                 if (type === 'success' || type === 'info') {
+                    if (typeof button.attr('on-success') !== 'undefined') {
+                        eval(button.attr('on-success'));
+                    } 
+                    
                     if (typeof button.attr('pre-img') !== 'undefined') {
                         document.querySelectorAll('[id="'+ button.attr('pre-img') + '"]').forEach(function(element) {
                             if (element.hasAttribute('src')) {
@@ -173,8 +177,6 @@ var Dashboard = function() {
                             element.style.display = 'none';
                         });
                         button.hide();
-                    } else if (typeof button.attr('on-success') !== 'undefined') {
-                        eval(button.attr('on-success'));
                     } else {
                         var table = null;
                         if (typeof button.attr('data-table') !== 'undefined') {

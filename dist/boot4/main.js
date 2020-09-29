@@ -27,5 +27,5 @@ var Boot4 = function() {
                 });
             }
         }
-    }
+    };
 } ();

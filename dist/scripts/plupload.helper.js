@@ -76,6 +76,7 @@
             Error: function(up, err) {
                 if (currentFileId) {
                     $('#' + currentFileId + ' > .status').removeClass('badge-light').addClass('badge-danger').html('<i class="la la-warning"></i> ' + settings.texts.failure);
+                    currentFileId = null;
                 }
                 
                 Dashboard.notify('error', settings.texts.warning, err.message);

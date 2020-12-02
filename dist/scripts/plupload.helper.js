@@ -53,9 +53,7 @@
             FileUploaded: function(up, file, response) {
                 try {
                     var res = $.parseJSON(response.response);
-                    if (!res.status || res.status !== 'success') {
-                        throw 'Invalid response!';
-                    }
+                    if (!res.status || res.status !== 'success')  throw 'Invalid response!';
                     
                     $('#' + file.id + ' > .status').removeClass('badge-light').addClass('badge-success').html('<i class="la la-check"></i> ' + settings.texts.success);
                     $('#' + file.id + ' > .remove').addClass('hidden d-none');
@@ -68,7 +66,10 @@
                 }
                 catch (err) {
                     $('#' + file.id + ' > .status').removeClass('badge-light').addClass('badge-danger').html('<i class="la la-warning"></i> ' + settings.texts.failure);
-                    Dashboard.notify('error', settings.texts.failure, res.error.message);
+                    
+                    if (res && res.error && res.error.message) err = res.error.message;
+                    
+                    Dashboard.notify('error', settings.texts.failure, err);
                 }
             },
             Error: function(up, err) {

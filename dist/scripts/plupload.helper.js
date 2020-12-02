@@ -53,13 +53,13 @@
             FileUploaded: function(up, file, response) {
                 try {
                     var res = $.parseJSON(response.response);
-                    if (!res.status || res.status !== 'success')  throw 'Invalid response!';
+                    if (!res.data) throw 'Invalid response!';
                     
                     $('#' + file.id + ' > .status').removeClass('badge-light').addClass('badge-success').html('<i class="la la-check"></i> ' + settings.texts.success);
                     $('#' + file.id + ' > .remove').addClass('hidden d-none');
 
                     if (callback && typeof callback === "function") {
-                        callback(file, response);
+                        callback(file, res);
                     } else {
                         Dashboard.notify('success', settings.texts.success, 'Your file [' + file.name + '] was uploaded successfully.');
                     }
@@ -67,7 +67,8 @@
                 catch (err) {
                     $('#' + file.id + ' > .status').removeClass('badge-light').addClass('badge-danger').html('<i class="la la-warning"></i> ' + settings.texts.failure);
                     
-                    if (res && res.error && res.error.message) err = res.error.message;
+                    if (err instanceof SyntaxError) err = 'Invalid request!';
+                    else if (res && res.error && res.error.message) err = res.error.message;
                     
                     Dashboard.notify('error', settings.texts.failure, err);
                 }

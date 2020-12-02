@@ -43,7 +43,7 @@
             },
             FilesAdded: function(up, files) {
                 plupload.each(files, function(file) {
-                    $('#' + settings.DOM.file_list).append('<div class="alert alert-info added-files" id="' + file.id + '">' + file.name + '(' + plupload.formatSize(file.size) + ') &nbsp;&nbsp; <span class="status badge badge-info"></span> <a href="javascript:;" style="margin-top:-5px" class="remove float-right btn btn-sm btn-danger text-lowercase"><i class="la la-times"></i> ' + settings.texts.remove + '</a></div>');
+                    $('#' + settings.DOM.file_list).append('<div class="alert alert-info added-files" id="' + file.id + '">' + file.name + '(' + plupload.formatSize(file.size) + ') &nbsp;&nbsp; <span class="status badge badge-info"></span> <a href="javascript:;" style="margin-top:-5px" class="remove float-right btn btn-sm btn-danger text-lowercase"><i class="la la-trash"></i> ' + settings.texts.remove + '</a></div>');
                 });
             },
             UploadProgress: function(up, file) {

@@ -43,7 +43,7 @@
             },
             FilesAdded: function(up, files) {
                 plupload.each(files, function(file) {
-                    $('#' + settings.DOM.file_list).append('<div class="alert alert-info added-files" id="' + file.id + '">' + file.name + '(' + plupload.formatSize(file.size) + ') &nbsp;&nbsp; <span class="status badge badge-info"></span> <a href="javascript:;" style="margin-top:-5px" class="remove pull-right btn btn-sm btn-danger text-lowercase"><i class="fa fa-times"></i> ' + settings.texts.remove + '</a></div>');
+                    $('#' + settings.DOM.file_list).append('<div class="alert alert-info added-files" id="' + file.id + '">' + file.name + '(' + plupload.formatSize(file.size) + ') &nbsp;&nbsp; <span class="status badge badge-info"></span> <a href="javascript:;" style="margin-top:-5px" class="remove float-right btn btn-sm btn-danger text-lowercase"><i class="la la-times"></i> ' + settings.texts.remove + '</a></div>');
                 });
             },
             UploadProgress: function(up, file) {
@@ -53,19 +53,19 @@
             FileUploaded: function(up, file, response) {
                 var res = $.parseJSON(response.response);
                 if (res.status && res.status === 'success') {
-                    $('#' + file.id + ' > .status').removeClass('badge-light').addClass('badge-success').html('<i class="fa fa-check"></i> ' + settings.texts.done);
+                    $('#' + file.id + ' > .status').removeClass('badge-light').addClass('badge-success').html('<i class="la la-check"></i> ' + settings.texts.done);
                     $('#' + file.id + ' > .remove').addClass('hidden d-none');
 
                     callback(file, response);
                 } else {
-                    $('#' + file.id + ' > .status').removeClass('badge-light').addClass('badge-danger').html('<i class="fa fa-warning"></i> ' + settings.texts.failed);
+                    $('#' + file.id + ' > .status').removeClass('badge-light').addClass('badge-danger').html('<i class="la la-warning"></i> ' + settings.texts.failed);
 
                     Dashboard.notify('error', settings.texts.warning, res.error.message);
                 }
             },
             Error: function(up, err) {
                 if (currentFileId) {
-                    $('#' + currentFileId + ' > .status').removeClass('badge-light').addClass('badge-danger').html('<i class="fa fa-warning"></i> ' + settings.texts.failed);
+                    $('#' + currentFileId + ' > .status').removeClass('badge-light').addClass('badge-danger').html('<i class="la la-warning"></i> ' + settings.texts.failed);
                 }
                 
                 Dashboard.notify('error', settings.texts.warning, err.message);

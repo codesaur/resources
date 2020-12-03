@@ -51,6 +51,8 @@
                 $('#' + file.id + ' > .status').html(file.percent + '%');
             },
             FileUploaded: function(up, file, response) {
+                currentFileId = null;
+                
                 try {
                     var res = $.parseJSON(response.response);
                     if (!res.data) throw 'Invalid response!';

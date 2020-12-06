@@ -26,11 +26,10 @@
             messages: settings.validation.messages,
             focusInvalid: settings.validation.focusInvalid,
             invalidHandler: function(event, validator) {
-                if (typeof container !== 'undefined') {
-                    Dashboard.scroll(container);
-                } else {
-                    Dashboard.scroll(form);
-                }
+                $('html, body').animate({
+                    scrollTop: typeof container !== 'undefined' ? container.offset().top : form.offset().top
+                }, 'slow');
+                
                 Dashboard.notify('error', settings.validation.notify.title, settings.validation.notify.notice);
             }
         });

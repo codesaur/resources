@@ -80,7 +80,7 @@
                 currentFileId = null;
                 
                 try {
-                    var res = $.parseJSON(response.response);
+                    var res = JSON.parse(response.response);
                     if (!res.data) throw 'Invalid response!';
                     
                     $('#' + file.id + ' > .remove').remove();

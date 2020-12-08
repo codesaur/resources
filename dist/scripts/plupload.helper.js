@@ -20,9 +20,6 @@
                 failure: 'Failure',
                 success: 'Success'
             },
-            multipart_params : {
-                real_name : "value"
-            },
             runtimes: 'html5,flash,silverlight,html4',
             flash_swf_url: 'https://cdn.jsdelivr.net/gh/moxiecode/plupload/js/Moxie.swf',
             silverlight_xap_url: 'https://cdn.jsdelivr.net/gh/moxiecode/plupload/js/Moxie.xap'
@@ -67,11 +64,6 @@
                     $('#' + settings.DOM.upload_files).removeClass('pluploader-ready btn-primary').addClass('btn-secondary');
                 }
             },
-            /*BeforeUpload: function(up, file) {
-                settings.multipart_params = {
-                    real_name: file.name
-                };
-            },*/
             UploadProgress: function(up, file) {
                 currentFileId = file.id;
                 $('#' + file.id + ' > .status').html(file.percent + '%');

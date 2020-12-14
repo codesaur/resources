@@ -5,9 +5,9 @@
         var settings = $.extend(true, {
             url: 'javascript:;',
             DOM: {
-                file_list: null,
-                pick_files: null,
-                upload_files: null
+                pick_selector: null,
+                files_selector: null,
+                upload_selector: null
             },
             filters: {
                 max_file_size: '2mb',
@@ -26,42 +26,41 @@
         }, options);
         
         settings.container = $(this)[0];
-        settings.browse_button = document.getElementById(settings.DOM.pick_files);
 
         settings.init = {
             PostInit: function() {
-                $('#' + settings.DOM.file_list).html('');
+                $(settings.DOM.files_selector).html('');
                 
-                $('#' + settings.DOM.upload_files).removeClass('pluploader-ready btn-primary').addClass('btn-secondary');
+                $(settings.DOM.upload_selector).removeClass('pluploader-ready btn-primary').addClass('btn-secondary');
                 
-                $('#' + settings.DOM.upload_files).click(function() {
-                    if ($('#' + settings.DOM.upload_files).hasClass('pluploader-ready')) {
+                $(settings.DOM.upload_selector).click(function() {
+                    if ($(settings.DOM.upload_selector).hasClass('pluploader-ready')) {
                         uploader.start();
                     }
                     
                     return false;
                 });
-                $('#' + settings.DOM.file_list).on('click', '.added-files .remove', function() {
+                $(settings.DOM.files_selector).on('click', '.added-files .remove', function() {
                     uploader.removeFile($(this).parent('.added-files').attr('id'));
 
                     $(this).parent('.added-files').remove();
                     
-                    if ($('#' + settings.DOM.file_list + ' .added-files').length > 0) {
-                        $('#' + settings.DOM.upload_files).removeClass('btn-secondary').addClass('pluploader-ready btn-primary');
+                    if ($(settings.DOM.files_selector + ' .added-files').length > 0) {
+                        $(settings.DOM.upload_selector).removeClass('btn-secondary').addClass('pluploader-ready btn-primary');
                     } else {
-                        $('#' + settings.DOM.upload_files).removeClass('pluploader-ready btn-primary').addClass('btn-secondary');
+                        $(settings.DOM.upload_selector).removeClass('pluploader-ready btn-primary').addClass('btn-secondary');
                     }
                 });
             },
             FilesAdded: function(up, files) {
                 plupload.each(files, function(file) {
-                    $('#' + settings.DOM.file_list).append('<div class="alert alert-info added-files" id="' + file.id + '">' + file.name + '(' + plupload.formatSize(file.size) + ') &nbsp;&nbsp; <span class="status badge badge-info"></span> <a href="javascript:;" style="margin-top:-5px" class="remove float-right btn btn-sm btn-danger text-lowercase"><i class="la la-trash"></i> ' + settings.texts.remove + '</a></div>');
+                    $(settings.DOM.files_selector).append('<div class="alert alert-info added-files" id="' + file.id + '">' + file.name + '(' + plupload.formatSize(file.size) + ') &nbsp;&nbsp; <span class="status badge badge-info"></span> <a href="javascript:;" style="margin-top:-5px" class="remove float-right btn btn-sm btn-danger text-lowercase"><i class="la la-trash"></i> ' + settings.texts.remove + '</a></div>');
                 });
                 
-                if ($('#' + settings.DOM.file_list + ' .added-files').length > 0) {
-                    $('#' + settings.DOM.upload_files).removeClass('btn-secondary').addClass('pluploader-ready btn-primary');
+                if ($(settings.DOM.files_selector + ' .added-files').length > 0) {
+                    $(settings.DOM.upload_selector).removeClass('btn-secondary').addClass('pluploader-ready btn-primary');
                 } else {
-                    $('#' + settings.DOM.upload_files).removeClass('pluploader-ready btn-primary').addClass('btn-secondary');
+                    $(settings.DOM.upload_selector).removeClass('pluploader-ready btn-primary').addClass('btn-secondary');
                 }
             },
             UploadProgress: function(up, file) {
@@ -94,10 +93,10 @@
                     Dashboard.notify('error', settings.texts.failure, err);
                 }
 
-                if ($('#' + settings.DOM.file_list + ' .added-files').length > 0) {
-                    $('#' + settings.DOM.upload_files).removeClass('btn-secondary').addClass('pluploader-ready btn-primary');
+                if ($(settings.DOM.files_selector + ' .added-files').length > 0) {
+                    $(settings.DOM.upload_selector).removeClass('btn-secondary').addClass('pluploader-ready btn-primary');
                 } else {
-                    $('#' + settings.DOM.upload_files).removeClass('pluploader-ready btn-primary').addClass('btn-secondary');
+                    $(settings.DOM.upload_selector).removeClass('pluploader-ready btn-primary').addClass('btn-secondary');
                 }
             },
             Error: function(up, err) {

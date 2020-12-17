@@ -5,7 +5,6 @@
         var settings = $.extend(true, {
             url: 'javascript:;',
             DOM: {
-                pick_selector: null,
                 files_selector: null,
                 upload_selector: null
             },

@@ -33,7 +33,7 @@
                 $(settings.DOM.upload_selector).removeClass('pluploader-ready btn-primary').addClass('btn-secondary');
                 
                 $(settings.DOM.upload_selector).click(function() {
-                    if ($(settings.DOM.upload_selector).hasClass('pluploader-ready')) {
+                    if ($(this).hasClass('pluploader-ready')) {
                         uploader.start();
                     }
                     

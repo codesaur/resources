@@ -65,7 +65,7 @@
                 },
                 callback: function (result) {
                     if (result) {                        
-                        options.data['prompt_result'] = result;
+                        settings.data['prompt_result'] = result;
                         
                         var form = document.createElement('form');
                         

@@ -1,9 +1,10 @@
 /* global Dashboard, bootbox */
 
 (function($) {
-    $.fn.Delete = function(options) {
+    $.fn.DeletePrompt = function(options) {
         var settings = $.extend(true, {
             selector: '.delete',
+            inputType: 'text',
             ajax: {
                 url:    'javascript:;',
                 method: 'POST'
@@ -48,9 +49,10 @@
                 settings.data['files_id'] = button.attr('files_id');
             }
 
-            bootbox.confirm({
+            bootbox.prompt({
                 title: settings.text.title,
                 message: settings.text.question,
+                inputType: settings.inputType,
                 buttons: {
                     confirm: {
                         label: '<i class="fa fa-check"></i> ' + settings.text.yes,
@@ -62,7 +64,9 @@
                     }
                 },
                 callback: function (result) {
-                    if (result) {
+                    if (result) {                        
+                        options.data['prompt_result'] = result;
+                        
                         var form = document.createElement('form');
                         
                         let idStr = 'form' + (document.forms.length + 1);

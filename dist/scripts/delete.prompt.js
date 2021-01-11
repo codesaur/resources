@@ -56,11 +56,11 @@
                 buttons: {
                     confirm: {
                         label: '<i class="fa fa-check"></i> ' + settings.text.yes,
-                        className: 'btn-primary'
+                        className: 'btn-danger'
                     },
                     cancel: {
                         label: '<i class="fa fa-times"></i> ' + settings.text.no,
-                        className: 'btn-danger'
+                        className: 'btn-light'
                     }
                 },
                 callback: function (result) {

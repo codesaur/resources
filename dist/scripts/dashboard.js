@@ -164,6 +164,7 @@ var Dashboard = function() {
         
         complete: function(type, button, modal, response) {
             if (typeof button !== 'undefined') {
+                button.attr('data-response', JSON.stringify(response));
                 if (type === 'success' || type === 'info') {
                     if (typeof button.attr('on-success') !== 'undefined') {
                         eval(button.attr('on-success'));
